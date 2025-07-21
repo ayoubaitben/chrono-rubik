@@ -32,7 +32,9 @@ export default function Home() {
   };
 
   const resetTimer = () => {
-    startStopTimer();
+    clearInterval(timerRef.current);
+    timerRef.current = null;
+    setIsRunning(false);
     setSeconds(0);
   };
 
@@ -49,13 +51,19 @@ export default function Home() {
       <h1 className="text-2xl text-amber-300 text-center">
         Site Chrono Rubik's Cube
       </h1>
-      <div class="text-center text-8xl p-90">{formatTime(seconds)}</div>
-      <div class="text-center text-6xl">
-        <button onClick={startStopTimer}>
-          {" "}
-          {isRunning ? "Stop" : "Démarrer"}
-        </button>
-        <button onClick={resetTimer}>Reset</button>
+
+      <div className="text-center text-8xl p-90 ">{formatTime(seconds)}</div>
+
+      <div className="flex justify-center space-x-6 mt-6">
+        <div className="border-2 text-5xl justify-center flex w-86 bg-green-700 rounded">
+          <button onClick={startStopTimer}>
+            {" "}
+            {isRunning ? "Stop" : "Démarrer"}
+          </button>
+        </div>
+        <div className="	bg-red-700 border-2 text-5xl justify-center flex w-86 text-white rounded">
+          <button onClick={resetTimer}>Reset</button>
+        </div>
       </div>
     </div>
   );
